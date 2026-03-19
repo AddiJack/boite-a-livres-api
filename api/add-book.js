@@ -52,12 +52,17 @@ export default async function handler(req, res) {
     }
 
     // Build the page body
+    // ✅ Couverture en type URL dans la propriété
+    if (couverture) {
+      properties['Couverture'] = { url: couverture };
+    }
+
     const body = {
       parent: { database_id: NOTION_DATABASE_ID },
       properties,
     };
 
-    // Add cover image if available
+    // Cover de page en bonus (image en haut de la fiche du livre)
     if (couverture) {
       body.cover = { type: 'external', external: { url: couverture } };
     }
